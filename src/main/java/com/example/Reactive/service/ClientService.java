@@ -1,7 +1,8 @@
 package com.example.Reactive.service;
 
 import com.example.Reactive.dao.ClientRepository;
-import com.example.Reactive.entity.Client;
+import com.example.Reactive.dto.ClientDTO;
+import com.example.Reactive.mapper.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -15,27 +16,33 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
 
-    Mono<Client> getClientById(Integer id) {
+    Mono<ClientDTO> getClientById(Integer id) {
         return clientRepository.findById(id)
+                .map(ClientMapper::convertEntityToDto)
                 .subscribeOn(Schedulers.parallel());
     }
 
-    Mono<Client> getClientByName(String name) {
+    Mono<ClientDTO> getClientByName(String name) {
         return clientRepository.findByName(name)
+                .map(ClientMapper::convertEntityToDto)
                 .subscribeOn(Schedulers.parallel());
     }
 
-    Mono<Client> getClientBySurName(String surname) {
+    Mono<ClientDTO> getClientBySurName(String surname) {
         return clientRepository.findBySurName(surname)
+                .map(ClientMapper::convertEntityToDto)
                 .subscribeOn(Schedulers.parallel());
     }
 
-    Mono<Client> getClientByEmail(String email) {
+    Mono<ClientDTO> getClientByEmail(String email) {
         return clientRepository.findByEmail(email)
+                .map(ClientMapper::convertEntityToDto)
                 .subscribeOn(Schedulers.parallel());
     }
 
-    Flux<Client> getAllClient() {
-        return clientRepository.findAll();
+    Flux<ClientDTO> getAllClient() {
+        return clientRepository.findAll()
+                .map(ClientMapper::convertEntityToDto)
+                .subscribeOn(Schedulers.parallel());
     }
 }
