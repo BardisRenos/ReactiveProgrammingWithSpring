@@ -20,4 +20,5 @@ public class Client {
     private Integer customerID;
     private String name;
     private String surname;
+    private String email;
 }
