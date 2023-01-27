@@ -4,20 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="client")
+@Document(collection="client")
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customerID;
+    private Integer clientID;
     private String name;
     private String surName;
     private String email;

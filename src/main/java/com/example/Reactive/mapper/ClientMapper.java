@@ -7,8 +7,10 @@ import org.modelmapper.ModelMapper;
 public class ClientMapper {
 
     public static ClientDTO convertEntityToDto(Client client) {
-        ModelMapper mapper = new ModelMapper();
+        return new ModelMapper().map(client, ClientDTO.class);
+    }
 
-        return mapper.map(client, ClientDTO.class);
+    public static Client convertDtoToClient(ClientDTO clientDTO) {
+        return new ModelMapper().map(clientDTO, Client.class);
     }
 }
